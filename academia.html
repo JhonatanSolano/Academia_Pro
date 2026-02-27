@@ -1,0 +1,51 @@
+---
+layout: default
+title: Cursos y Contenidos
+---
+
+<div style="margin-top: 2rem; text-align: center;">
+    <h2 id="dynamic-title" style="color: var(--primary); font-size: 2rem; font-weight: 800;">
+        Selecciona un curso
+    </h2>
+    <p id="dynamic-subtitle" style="color: var(--secondary); font-weight: 600;"></p>
+</div>
+
+<div id="preunal" class="course-section hidden">
+    {% include topic_card.html datos=site.data.preunal %}
+</div>
+
+<div id="preicfes" class="course-section hidden">
+    {% include topic_card.html datos=site.data.preicfes %}
+</div>
+
+<script>
+    function updateAcademicContent(sectionId) {
+        document.getElementById('preunal').classList.add('hidden');
+        document.getElementById('preicfes').classList.add('hidden');
+
+        const target = document.getElementById(sectionId);
+        if (target) {
+            target.classList.remove('hidden');
+        }
+
+        const titleElement = document.getElementById('dynamic-title');
+        if (sectionId === 'preunal') {
+            titleElement.innerText = "Preparación Universidad Nacional";
+        } else if (sectionId === 'preicfes') {
+            titleElement.innerText = "Preparación ICFES Saber 11";
+        }
+    }
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const section = urlParams.get('section');
+    
+    if (section) {
+        updateAcademicContent(section);
+    }
+
+    window.addEventListener('popstate', function() {
+        const newParams = new URLSearchParams(window.location.search);
+        const newSection = newParams.get('section');
+        if (newSection) updateAcademicContent(newSection);
+    });
+</script>

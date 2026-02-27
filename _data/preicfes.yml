@@ -1,0 +1,147 @@
+- titulo_unidad: "Unidad 1: Interpretación y Representación"
+  temas:
+    - nombre: "Tema 1.1: Tipos de gráficos"
+      id_teoria: "teoria-1-1"
+      id_ejemplos: "ejemplos-1-1"
+      id_ejercicios: "ejercicios-1-1"
+      teoria_html: >
+        <h5>Teoría: Tipos de Gráficos</h5>
+        <p>Los gráficos estadísticos permiten visualizar datos rápidamente. Los más comunes en el ICFES son:</p>
+        <div style="overflow-x: auto;">
+          <table class="teoria-table" style="width:100%; border-collapse: collapse; margin: 15px 0;">
+            <thead>
+              <tr style="background: var(--primary); color: white;">
+                <th style="padding:10px; border:1px solid #ddd;">Tipo de Gráfico</th>
+                <th style="padding:10px; border:1px solid #ddd;">Uso Principal</th>
+                <th style="padding:10px; border:1px solid #ddd;">Ventaja Clave</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td style="padding:10px; border:1px solid #ddd;">Diagrama de Barras</td>
+                <td style="padding:10px; border:1px solid #ddd;">Comparar cantidades entre categorías independientes.</td>
+                <td style="padding:10px; border:1px solid #ddd;">Fácil de leer para valores exactos.</td>
+              </tr>
+              <tr style="background: #f8fafc;">
+                <td style="padding:10px; border:1px solid #ddd;">Diagrama de Torta</td>
+                <td style="padding:10px; border:1px solid #ddd;">Mostrar la relación de las partes con un "todo" (porcentajes).</td>
+                <td style="padding:10px; border:1px solid #ddd;">Permite ver qué categoría domina el total.</td>
+              </tr>
+              <tr>
+                <td style="padding:10px; border:1px solid #ddd;">Polígono de Frecuencias</td>
+                <td style="padding:10px; border:1px solid #ddd;">Mostrar cambios o tendencias a través del tiempo.</td>
+                <td style="padding:10px; border:1px solid #ddd;">Visualiza si algo sube o baja.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p><b>Nota:</b> Recuerda siempre fijarte en los ejes X e Y.</p>
+        <div class="img-container">
+            <img src="img/graficos.png" alt="Gráficos estadísticos" style="max-width:100%; height:auto;">
+            <p><small><i>Figura 1: Diagramas de barras, Polígono y Torta.</i></small></p>
+        </div>
+      ejemplos_html: >
+        <h5>Ejemplo de Análisis</h5>
+        <div class="formula-container" style="margin: 20px 0;">
+          <p><b>Contexto:</b> Una empresa tiene un presupuesto mensual de $10.000.000 para gastos operativos.</p>
+        </div>
+        Y tiene los siguientes gastos en un mes determinado:
+        <div class="formula-container" style="margin: 20px 0;">
+          Sueldos: $6.000.000 (60%) <br> Arriendo: $3.000.000 (30%) <br> Servicios: $1.000.000 (10%)
+        </div>
+        <ul>
+          <li><b>📊 En Barras:</b> Ideal para comparar gastos directamente.</li>
+          <div class="img-container" style="margin: 20px 0;"><img src="img/barras.jpg" style="max-width:450px;"></div>
+
+          <li><b>🥧 En Torta:</b> Ideal para ver porcentajes del total.</li>
+          <div class="img-container" style="margin: 20px 0;"><img src="img/torta.jpg" style="max-width:450px;"></div>
+
+          <li><b>📈 En Polígono:</b> Ideal, por ejemplo, para servicios en 6 meses.</li>
+          <div class="img-container" style="margin: 20px 0;"><img src="img/poligono.png" style="max-width:450px;"></div>
+        </ul>
+        <div style="background: #e0f2fe; padding: 15px; border-radius: 8px; border-left: 5px solid #0ea5e9;">
+          <b>💡 Tip ICFES:</b> Si preguntan por "tendencias", busca el gráfico de líneas (polígono de frecuencias).
+        </div>
+      ejercicios_html: >
+        <h5>Ejercicio de Gráficos</h5>
+        <p>¿Qué gráfico usarías para la temperatura minuto a minuto?</p>
+        <button class="tema-btn" style="width:auto; padding: 10px 20px; margin-bottom: 15px;" onclick="toggleRespuesta(this)">
+          Ver respuesta
+        </button>
+
+        <div class="respuesta-ejercicio hidden" style="display: none;">
+          <div class="formula-container">
+            <p><b>El polígono de frecuencias, para ver tendencias.</b></p>
+          </div>
+        </div>
+    - nombre: "Tema 1.2: Conjuntos y Diagramas de Venn"
+      id_teoria: "teoria-1-2"
+      id_ejemplos: "ejemplos-1-2"
+      id_ejercicios: "ejercicios-1-2"
+      teoria_html: >
+        <h5>Resumen Teórico</h5>
+        <p>Relaciones lógicas: Unión (∪), Intersección (∩) y Complemento (A').</p>
+      ejemplos_html: >
+        <p>Si $$A: \{1,2,3\}$$ y $$B: \{3,4,5\}$$. <br> 
+        Entonces $$A \cap B = \{3\}$$ Ya que el número 3 está en ambos conjuntos.</p>
+      ejercicios_html: >
+        <p>Dibuje un diagrama para fútbol y natación simultáneamente.</p>
+
+    - nombre: "Tema 1.3: Gráficas de funciones"
+      id_teoria: "teoria-1-3"
+      id_ejemplos: "ejemplos-1-3"
+      id_ejercicios: "ejercicios-1-3"
+      teoria_html: >
+        <h5>Resumen: Gráficas de funciones</h5>
+        <p>Relación entre variables en el plano cartesiano.</p>
+      ejemplos_html: >
+       <h5>Análisis de Ofertas Laborales</h5>
+        <p style="margin-bottom: 15px;">
+        Si definimos <span class="math-var">V</span> como el valor final y 
+        <span class="math-var">x</span> como el número de años, las funciones que modelan el crecimiento son:
+        </p> 
+       <div class="formula-container">
+          <p><b>Oferta A (Crecimiento Lineal):</b></p>
+          $$V = 4.000.000 + (200.000 \cdot x)$$
+        </div>
+        <div class="formula-container">
+          <p><b>Oferta B (Crecimiento Exponencial):</b></p>
+          $$V = 4.000.000 \cdot (1,05)^x$$
+        </div>
+      ejercicios_html: >
+        <h5>Caso: Diseño de un Local Comercial</h5>
+        
+        <p style="margin-bottom: 15px;">
+          Un emprendedor en Bogotá desea alquilar un local rectangular para una librería. El contrato especifica que el área total es de 80 m². Por diseño arquitectónico, se requiere que el <b>largo</b> (<span class="math-var">L</span>) sea 2 metros mayor que el <b>ancho</b> (<span class="math-var">A</span>).
+        </p>
+        <p><i>¿Cuáles deben ser las dimensiones exactas para que el emprendedor pueda solicitar los estantes a medida?</i></p>
+
+        <button class="tema-btn" style="width:auto; padding: 10px 20px; margin-bottom: 15px;" onclick="toggleRespuesta(this)">
+          Ver respuesta
+        </button>
+
+        <div class="respuesta-ejercicio hidden" style="display: none;">
+          <div class="formula-container">
+            <p><b>Modelado Matemático:</b></p>
+            <ul>
+              <li>Relación de dimensiones: $$L = A + 2$$</li>
+              <li>Fórmula del área: $$A \cdot L = 80$$</li>
+            </ul>
+          </div>
+
+          <div class="formula-container" style="border-left-color: #10b981;">
+            <p><b>Sustitución y Ecuación Cuadrática:</b></p>
+            <p>Al sustituir <span class="math-var">L</span> en la fórmula del área obtenemos:</p>
+            $$A \cdot (A + 2) = 80$$
+            $$A^2 + 2A - 80 = 0$$
+          </div>
+          Factorizando, buscamos dos números que sumados den <span class="math-var">2</span> y multiplicados den <span class="math-var">-80</span>, los cuales son <span class="math-var">10</span> y <span class="math-var">-8</span>. Por lo tanto:
+          $$(A + 10)(A - 8) = 0$$
+          Así, las soluciones son:
+          $$A = -10 \quad (\text{no válida, ya que el ancho no puede ser negativo})$$
+          $$A = 8 \quad (\text{válida})$$ 
+           Luego, el largo es:  $$L = A + 2 = 8 + 2 = 10$$
+
+          <p><b>Respuesta final:</b> El ancho es 8m y el largo es 10m.</p>
+        </div>
+

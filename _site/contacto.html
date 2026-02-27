@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contacto | Jhonatan Solano</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0f172a;    
+            --accent: #06b6d4;     
+            --secondary: #6366f1;  
+            --highlight: #fbbf24; 
+            --bg: #f1f5f9;
+            --text: #334155;
+            --white: #ffffff;
+        }
+
+        body { 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            background-color: var(--bg); 
+            color: var(--text); 
+            margin: 0; 
+        }
+
+        nav {
+            background: var(--primary);
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .logo { color: var(--white); font-weight: 800; font-size: 1.5rem; letter-spacing: -1px; }
+        .logo span { color: var(--accent); }
+
+        .nav-links { display: flex; gap: 2rem; list-style: none; margin: 0; padding: 0; }
+        .nav-links a { color: #cbd5e1; text-decoration: none; font-weight: 600; transition: 0.3s; font-size: 0.95rem; }
+        .nav-links a:hover { color: var(--accent); filter: drop-shadow(0 0 8px rgba(6, 182, 212, 0.4)); }
+
+        .dropdown { position: relative; }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background: var(--white);
+            min-width: 180px;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            border-top: 3px solid var(--accent);
+        }
+        .dropdown-content a { color: var(--primary); padding: 12px 16px; display: block; font-size: 0.9rem; text-decoration: none; }
+        .dropdown-content a:hover { background: #f8fafc; color: var(--secondary); }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        header {
+            background: radial-gradient(circle at top right, var(--secondary), var(--primary));
+            color: white;
+            padding: 4rem 1rem;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+        }
+
+        .container { 
+            max-width: 1000px; 
+            margin: 40px auto 4rem; 
+            padding: 0 1.5rem; 
+            position: relative; 
+        }
+
+        .unit {
+            background: transparent; 
+            margin-bottom: 2.5rem;
+            border: none;
+        }
+
+        .tema-detail-container.hidden {
+            display: none !important;
+        }
+
+        .unit-content {
+            display: none; 
+        }
+
+        .unit-header {
+            padding: 1rem 0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            color: var(--primary);
+            font-size: 1.5rem;
+            border-bottom: 2px solid #e2e8f0; 
+        }
+
+        .grid-resources { 
+            display: flex;
+            flex-direction: column; 
+            gap: 10px; 
+            margin-top: 15px;
+            width: 200px; 
+        }
+
+        .resource-card {
+            background: var(--white);
+            border: 2px solid #e2e8f0;
+            padding: 0.8rem 1.2rem;
+            border-radius: 10px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+        }
+
+        .resource-card:hover { border-color: var(--accent); background: #f0f9ff; color: var(--accent); }
+        .resource-card.active-tab { background: var(--accent); border-color: var(--accent); color: var(--primary); }
+
+        .tab-container { margin-top: 15px; flex: 1; }
+        .tab-content { display: none; padding: 10px 20px; animation: fadeIn 0.3s ease; }
+        .hidden { display: none; }
+
+        .formula {
+            background: #1e293b; 
+            color: #38bdf8;    
+            padding: 1.5rem;
+            border-radius: 12px;
+            font-family: 'Fira Code', monospace;
+            margin: 1.5rem 0;
+            border-left: 5px solid var(--highlight);
+        }
+        
+        .tema-btn {
+            width: 100%;
+            text-align: left;
+            padding: 1rem 1.5rem;
+            margin-top: 10px;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--primary);
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .tema-btn:hover {
+            background: #f0f9ff;
+            border-color: var(--accent);
+        }
+
+        .layout-recursos {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            background: transparent; 
+        }
+
+        .grid-resources {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            min-width: 180px;
+        }
+
+        .tab-container {
+            flex: 1;
+        }
+
+        .content-box {
+            padding: 0 10px;
+            color: var(--text);
+            line-height: 1.8;
+        }
+
+        .hidden { display: none; }
+        .chevron { transition: transform 0.3s; font-size: 0.8rem; }
+        .active .chevron { transform: rotate(180deg); }
+
+        .feature-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        cursor: default;
+        background: white; 
+        border-radius: 16px;
+        border: 1px solid #e2e8f0;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: var(--accent);
+        }
+        
+        .list-item-dynamic {
+            transition: all 0.3s ease;
+            padding: 8px;
+            border-radius: 8px;
+            list-style: none; 
+        }
+        .list-item-dynamic:hover {
+            padding-left: 20px;
+            background: #f0f9ff;
+            color: var(--secondary);
+        }
+
+        .formula-container {
+            background-color: #f8fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #6366f1; 
+            margin: 20px 0;
+        }
+
+        .mjx-chtml {
+            font-size: 110% !important;
+        }
+
+        .math-var {
+            font-family: "Times New Roman", Times, serif;
+            font-style: italic;
+            font-weight: bold;
+            color: #374151; 
+            padding: 0 3px;
+        }
+
+        .tab-content h5 {
+            font-size: 1.8rem !important; 
+            color: var(--primary);
+            margin-top: 15px;
+            margin-bottom: 25px;
+            display: block;
+            border-bottom: 2px solid var(--secondary); 
+            padding-bottom: 10px;
+            letter-spacing: -0.5px; 
+        }
+
+        .img-container {
+            text-align: center; 
+            margin: 25px 0;    
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+        }
+
+        .img-container p {
+            margin-top: 10px;  
+            width: 100%;       
+        }
+
+        .tema-btn.active {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .resource-card.active {
+            background-color: var(--primary);
+            color: white;
+            border-left: 4px solid var(--secondary);
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">ACADEMIA<span>PRO</span></div>
+        <ul class="nav-links">
+            <li><a href="/">Inicio</a></li>
+            <li class="dropdown">
+                <a href="#">Academia ▼</a>
+                <div class="dropdown-content">
+                    <a href="/academia.html?section=preunal">PREUNAL</a>
+                    <a href="/academia.html?section=preicfes">PREICFES</a>
+                </div>
+            </li>
+            <li><a href="/contacto.html">Contacto</a></li>
+        </ul>
+    </nav>
+
+    <header>
+        <h1 id="main-title">Matemáticas En Tu Bolsillo</h1>
+        <p id="main-subtitle">Potenciando tu futuro académico</p>
+    </header>
+
+    <div class="container">
+        <div class="unit" style="max-width: 650px; margin: 3rem auto; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 25px -5px rgba(0,0,0,0.05);">
+    
+    <div style="text-align: center; margin-bottom: 2.5rem;">
+        <div style="
+            width: 160px; 
+            height: 160px; 
+            margin: 0 auto 1.5rem; 
+            border-radius: 50%; 
+            overflow: hidden; 
+            border: 4px solid var(--white);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        ">
+            <img src="/img/Foto.jpg" alt="Profesor Jhonatan Solano" style="
+                width: 100%; 
+                height: 100%; 
+                object-fit: cover;
+                object-position: center;
+            ">
+        </div>
+
+        <h2 style="margin:0; font-weight: 800; color: var(--primary); font-size: 1.8rem; letter-spacing: -0.5px;">
+            Jhonatan Alejandro Solano Mendoza
+        </h2>
+        <p style="color: var(--secondary); font-weight: 600; font-size: 1.1rem; margin-top: 5px;">
+            Matemático - Universidad Nacional de Colombia
+        </p>
+    </div>
+
+    <div style="border-top: 1px solid #eee; padding-top: 1.5rem;">
+        <p>📍 <b>Ciudad:</b> Bogotá D.C., Colombia</p>
+        <p>📞 <b>WhatsApp:</b> <a href="https://wa.me/573112454282" style="color: var(--accent); text-decoration: none;">(+57) 311 245 4282</a></p>
+        <p>📧 <b>Correo:</b> <a href="mailto:jhsolanom@unal.edu.co" style="color: var(--accent); text-decoration: none;">jhsolanom@unal.edu.co</a></p>
+    </div>
+</div>
+    </div>
+
+    <script>
+        function toggleUnit(element) {
+            const content = element.nextElementSibling;
+            const isVisible = content.style.display === "block";
+            content.style.display = isVisible ? "none" : "block";
+            element.classList.toggle('active', !isVisible);
+        }
+
+        function showSection(sectionId) {
+            const sections = ['preunal', 'preicfes'];
+            sections.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.classList.add('hidden');
+                    
+                    el.querySelectorAll('.unit-content').forEach(u => {
+                        u.style.display = 'none';
+                    });
+                    
+                    el.querySelectorAll('.tema-detail-container').forEach(d => {
+                        d.classList.add('hidden');
+                        d.style.display = 'none';
+                    });
+
+                    el.querySelectorAll('.tema-btn').forEach(b => {
+                        b.style.borderColor = "#e2e8f0";
+                        b.style.background = "white";
+                    });
+                }
+            });
+            
+            const target = document.getElementById(sectionId);
+            if (target) target.classList.remove('hidden');
+
+            if (typeof updateTitle === "function") updateTitle(sectionId);
+        }
+
+        function toggleTema(button) {
+            const detail = button.nextElementSibling;
+            const isAlreadyOpen = !detail.classList.contains('hidden');
+            
+            const parentUnit = button.closest('.unit-content');
+            
+            parentUnit.querySelectorAll('.tema-detail-container').forEach(d => {
+                d.classList.add('hidden');
+                d.style.display = 'none';
+            });
+            
+            parentUnit.querySelectorAll('.tema-btn').forEach(b => {
+                b.style.borderColor = "#e2e8f0";
+                b.style.background = "white";
+            });
+
+            if (!isAlreadyOpen) {
+                detail.classList.remove('hidden');
+                detail.style.display = 'flex';
+                button.style.borderColor = "var(--accent)";
+                button.style.background = "#f0f9ff";
+            }
+        }
+
+        function showTab(btn, tabId) {
+            const target = document.getElementById(tabId);
+            const isAlreadyActive = target.style.display === 'block';
+            const container = btn.closest('.tema-detail-container');
+            container.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+            container.querySelectorAll('.resource-card').forEach(c => c.classList.remove('active-tab'));
+
+            if (!isAlreadyActive) {
+                target.style.display = 'block';
+                btn.classList.add('active-tab');
+            }
+        }
+
+        function toggleRespuesta(btn) {
+            const respuesta = btn.nextElementSibling;
+            const isHidden = respuesta.style.display === "none";
+
+            if (isHidden) {
+                respuesta.style.display = "block";
+                respuesta.classList.remove('hidden');
+                btn.textContent = "Ocultar respuesta";
+                
+                if (window.MathJax) {
+                    MathJax.typesetPromise();
+                }
+            } else {
+                respuesta.style.display = "none";
+                respuesta.classList.add('hidden');
+                btn.textContent = "Ver respuesta";
+            }
+        }
+    </script>
+
+<footer style="
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: var(--primary);
+    color: #cbd5e1;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 0.85rem;
+    z-index: 2000;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(5px);
+">
+    &copy; 2026 <b>Academia PRO</b>. Todos los derechos reservados. 
+    <span style="margin-left: 10px; color: var(--accent);">Diseñado por Jhonatan Solano</span>
+</footer>
+
+<style>
+    body { padding-bottom: 60px; } 
+</style>
+
+<script src="https://polyfill.io/v3/polyfill.min.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+</body>
+</html>

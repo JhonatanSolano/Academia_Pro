@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { AuthProvider } from "@/lib/hooks/useAuth";
 import AuthGuard from "@/components/auth/AuthGuard";
 import DashboardHeader from "@/components/modules/DashboardHeader";
+import AnalyticsProvider from "@/components/analytics/AnalyticsProvider";
 
 export const metadata: Metadata = {
   title: "Dashboard — Pódium Académico",
@@ -18,6 +19,7 @@ export default function StudentLayout({
   return (
     <AuthProvider>
       <AuthGuard>
+        <AnalyticsProvider />
         <div
           className="flex min-h-screen flex-col"
           style={{

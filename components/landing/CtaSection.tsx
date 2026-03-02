@@ -3,7 +3,11 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
-export default function CtaSection() {
+interface CtaSectionProps {
+  onLoginClick?: () => void;
+}
+
+export default function CtaSection({ onLoginClick }: CtaSectionProps) {
   return (
     <section
       aria-labelledby="cta-heading"
@@ -40,8 +44,8 @@ export default function CtaSection() {
             Accede al módulo gratuito, resuelve ejercicios tipo examen real y
             decides si quieres más.
           </p>
-          <a
-            href="/login"
+          <button
+            onClick={onLoginClick}
             className="group relative mt-8 inline-flex items-center gap-2 rounded-xl bg-white px-8 py-3.5 text-base font-semibold text-brand shadow-lg transition-all hover:bg-slate-100"
             aria-label="Acceder al módulo gratuito ahora"
           >
@@ -50,7 +54,7 @@ export default function CtaSection() {
               className="h-4 w-4 transition-transform group-hover:translate-x-1"
               aria-hidden="true"
             />
-          </a>
+          </button>
         </motion.div>
       </div>
     </section>

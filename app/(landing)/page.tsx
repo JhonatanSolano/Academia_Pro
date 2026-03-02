@@ -1,3 +1,6 @@
+"use client";
+
+import { useState } from "react";
 import {
   Navbar,
   HeroSection,
@@ -10,22 +13,27 @@ import {
   CtaSection,
   Footer,
 } from "@/components/landing";
+import LoginModal from "@/components/auth/LoginModal";
 
 export default function LandingPage() {
+  const [loginOpen, setLoginOpen] = useState(false);
+  const openLogin = () => setLoginOpen(true);
+
   return (
     <>
-      <Navbar />
+      <Navbar onLoginClick={openLogin} />
       <main>
-        <HeroSection />
+        <HeroSection onLoginClick={openLogin} />
         <ProblemSection />
         <FeaturesSection />
         <HowItWorksSection />
-        <PricingSection />
+        <PricingSection onLoginClick={openLogin} />
         <TrustSection />
         <FaqSection />
-        <CtaSection />
+        <CtaSection onLoginClick={openLogin} />
       </main>
       <Footer />
+      <LoginModal open={loginOpen} onClose={() => setLoginOpen(false)} />
     </>
   );
 }

@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Check,
@@ -12,6 +13,10 @@ import {
 import Link from "next/link";
 import { useAuth } from "@/lib/hooks/useAuth";
 import { isPremiumActive } from "@/types";
+import {
+  trackPremiumPageViewed,
+  trackPaymentInitiated,
+} from "@/lib/firebase/analytics";
 
 const benefits = [
   "Acceso completo a todos los módulos premium",
@@ -25,6 +30,11 @@ const benefits = [
 export default function PremiumPage() {
   const { user } = useAuth();
   const alreadyPremium = user ? isPremiumActive(user) : false;
+
+  /* Track premium page view */
+  useEffect(() => {
+    trackPremiumPageViewed(user?.uid).catch(() => {});
+  }, [user?.uid]);
 
   return (
     <div
@@ -120,6 +130,10 @@ export default function PremiumPage() {
             <button
               className="w-full rounded-xl bg-brand px-6 py-4 text-base font-bold text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand-light hover:shadow-xl hover:shadow-brand/30"
               onClick={() => {
+                // Track payment initiation
+                if (user?.uid) {
+                  trackPaymentInitiated(user.uid, 0).catch(() => {});
+                }
                 // TODO: Integrate Wompi checkout
                 alert("Integración Wompi pendiente");
               }}

@@ -15,6 +15,7 @@ import { usePrograms } from "@/lib/hooks/useModules";
 import { isPremiumActive, canAccessContent } from "@/types";
 import type { Program } from "@/types";
 import { DashboardSkeleton } from "@/components/ui/Skeletons";
+import { trackPremiumClicked } from "@/lib/firebase/analytics";
 
 export default function StudentDashboardPage() {
   const { user } = useAuth();
@@ -102,6 +103,7 @@ function ProgramCard({
   hasAccess: boolean;
   index: number;
 }) {
+  const { user } = useAuth();
   const isFree = program.type === "free";
 
   return (
@@ -154,6 +156,9 @@ function ProgramCard({
       ) : (
         <Link
           href="/premium"
+          onClick={() =>
+            trackPremiumClicked(user?.uid, "dashboard_card").catch(() => {})
+          }
           className="mt-auto inline-flex items-center gap-2 rounded-xl border border-premium/30 bg-premium/10 px-5 py-2.5 text-sm font-semibold text-premium transition-colors hover:bg-premium/20"
         >
           <Lock className="h-4 w-4" aria-hidden="true" />

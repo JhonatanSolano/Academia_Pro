@@ -11,6 +11,7 @@ import {
   Timestamp,
 } from "firebase/firestore";
 import { getFirebaseAuth, getFirebaseDb } from "./config";
+import { trackUserRegistered } from "./analytics";
 import type { UserProfile } from "@/types";
 
 const googleProvider = new GoogleAuthProvider();
@@ -42,6 +43,9 @@ export async function signInWithGoogle(): Promise<UserProfile> {
     ...newProfile,
     createdAt: serverTimestamp(),
   });
+
+  // Track new registration
+  trackUserRegistered(uid).catch(() => {});
 
   return newProfile;
 }

@@ -12,6 +12,11 @@ import ContentRenderer from "@/components/modules/ContentRenderer";
 import Breadcrumbs from "@/components/modules/Breadcrumbs";
 import PremiumLock from "@/components/modules/PremiumLock";
 import { ContentViewerSkeleton } from "@/components/ui/Skeletons";
+import {
+  trackModuleViewed,
+  trackContentViewed,
+  trackContentCompleted,
+} from "@/lib/firebase/analytics";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 
@@ -51,6 +56,12 @@ export default function ProgramViewerPage() {
       tree.units[0]?.topics[0]?.contents[0] ?? null;
     if (first) setActiveContent(first);
   }, [tree, activeContent]);
+
+  /* Track module view once tree loads */
+  useEffect(() => {
+    if (!tree || !user?.uid) return;
+    trackModuleViewed(user.uid, tree.id, tree.title).catch(() => {});
+  }, [tree, user?.uid]);
 
   /* Access check */
   if (!treeLoading && tree && user && !canAccessContent(tree, user)) {
@@ -112,6 +123,13 @@ export default function ProgramViewerPage() {
     };
     await markContentComplete(user.uid, completion);
     await loadCompletions();
+
+    // Track content completion
+    trackContentCompleted(
+      user.uid,
+      activeContent.id,
+      activeContent.programId
+    ).catch(() => {});
   };
 
   const isCompleted = completions.some(
@@ -125,7 +143,16 @@ export default function ProgramViewerPage() {
         tree={tree}
         completions={completions}
         activeContentId={activeContent?.id ?? null}
-        onSelectContent={setActiveContent}
+        onSelectContent={(content) => {
+          setActiveContent(content);
+          if (user?.uid && content) {
+            trackContentViewed(
+              user.uid,
+              content.id,
+              content.programId
+            ).catch(() => {});
+          }
+        }}
       />
 
       {/* Main content area */}

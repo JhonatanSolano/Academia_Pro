@@ -1,6 +1,20 @@
 export { getFirebaseAuth, getFirebaseDb, getFirebaseStorage } from "./config";
 export { signInWithGoogle, signOut, getUserProfile } from "./auth";
 export {
+  trackEvent,
+  trackUserRegistered,
+  trackSessionStart,
+  trackModuleViewed,
+  trackContentViewed,
+  trackContentCompleted,
+  trackPremiumPageViewed,
+  trackPremiumClicked,
+  trackPaymentInitiated,
+  trackPaymentConfirmed,
+  identifyUser,
+} from "./analytics";
+export type { MetricEventType, MetricEvent } from "./analytics";
+export {
   /* Programs */
   getPrograms,
   getProgramById,

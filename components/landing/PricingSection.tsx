@@ -38,7 +38,11 @@ const plans = [
   },
 ];
 
-export default function PricingSection() {
+interface PricingSectionProps {
+  onLoginClick?: () => void;
+}
+
+export default function PricingSection({ onLoginClick }: PricingSectionProps) {
   return (
     <section
       id="precio"
@@ -126,9 +130,9 @@ export default function PricingSection() {
                 ))}
               </ul>
 
-              <a
-                href={plan.ctaHref}
-                className={`mt-8 block rounded-xl py-3 text-center text-sm font-semibold transition-colors ${
+              <button
+                onClick={onLoginClick}
+                className={`mt-8 block w-full rounded-xl py-3 text-center text-sm font-semibold transition-colors ${
                   plan.highlighted
                     ? "bg-brand text-white shadow-md shadow-brand/20 hover:bg-brand-light"
                     : "border border-border bg-bg text-text hover:bg-bg-alt"
@@ -136,7 +140,7 @@ export default function PricingSection() {
                 aria-label={`${plan.cta} — Plan ${plan.name}`}
               >
                 {plan.cta}
-              </a>
+              </button>
             </motion.article>
           ))}
         </div>

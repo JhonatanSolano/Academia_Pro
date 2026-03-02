@@ -3,7 +3,11 @@
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 
-export default function HeroSection() {
+interface HeroSectionProps {
+  onLoginClick?: () => void;
+}
+
+export default function HeroSection({ onLoginClick }: HeroSectionProps) {
   return (
     <section
       id="hero"
@@ -66,8 +70,8 @@ export default function HeroSection() {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row"
         >
-          <a
-            href="/login"
+          <button
+            onClick={onLoginClick}
             className="group inline-flex items-center gap-2 rounded-xl bg-brand px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand-light hover:shadow-xl hover:shadow-brand/30"
             aria-label="Acceder gratis al módulo de demostración"
           >
@@ -76,7 +80,7 @@ export default function HeroSection() {
               className="h-4 w-4 transition-transform group-hover:translate-x-1"
               aria-hidden="true"
             />
-          </a>
+          </button>
           <a
             href="#precio"
             className="inline-flex items-center gap-2 rounded-xl border border-white/20 px-8 py-3.5 text-base font-medium text-white transition-all hover:border-white/40 hover:bg-white/5"

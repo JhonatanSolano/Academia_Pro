@@ -3,7 +3,6 @@
 import { useState, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, GraduationCap } from "lucide-react";
-import Link from "next/link";
 
 const navLinks = [
   { href: "#problema", label: "¿Por qué?" },
@@ -13,7 +12,11 @@ const navLinks = [
   { href: "#faq", label: "FAQ" },
 ];
 
-export default function Navbar() {
+interface NavbarProps {
+  onLoginClick?: () => void;
+}
+
+export default function Navbar({ onLoginClick }: NavbarProps) {
   const [open, setOpen] = useState(false);
 
   /** Close mobile menu and smooth-scroll to the target section */
@@ -60,13 +63,13 @@ export default function Navbar() {
             </li>
           ))}
           <li>
-            <Link
-              href="/login"
+            <button
+              onClick={onLoginClick}
               className="rounded-lg bg-brand px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-brand-light"
               aria-label="Acceder gratis a un módulo completo"
             >
               Acceder gratis
-            </Link>
+            </button>
           </li>
         </ul>
 
@@ -110,14 +113,16 @@ export default function Navbar() {
                 </li>
               ))}
               <li className="mt-2">
-                <Link
-                  href="/login"
-                  onClick={() => setOpen(false)}
-                  className="block rounded-lg bg-brand px-3 py-2 text-center text-sm font-semibold text-white transition-colors hover:bg-brand-light"
+                <button
+                  onClick={() => {
+                    setOpen(false);
+                    onLoginClick?.();
+                  }}
+                  className="block w-full rounded-lg bg-brand px-3 py-2 text-center text-sm font-semibold text-white transition-colors hover:bg-brand-light"
                   aria-label="Acceder gratis a un módulo completo"
                 >
                   Acceder gratis
-                </Link>
+                </button>
               </li>
             </ul>
           </motion.div>

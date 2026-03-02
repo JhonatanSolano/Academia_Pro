@@ -3,12 +3,20 @@
 import { motion } from "framer-motion";
 import { Lock, ShieldCheck } from "lucide-react";
 import Link from "next/link";
+import { useAuth } from "@/lib/hooks/useAuth";
+import { trackPremiumClicked } from "@/lib/firebase/analytics";
 
 /**
  * PremiumLock — glassmorphism overlay shown when a non-premium user
  * tries to access locked content.
  */
 export default function PremiumLock() {
+  const { user } = useAuth();
+
+  const handleClick = () => {
+    trackPremiumClicked(user?.uid, "premium_lock_overlay").catch(() => {});
+  };
+
   return (
     <motion.div
       initial={{ opacity: 0, scale: 0.96 }}
@@ -39,6 +47,7 @@ export default function PremiumLock() {
       {/* CTA */}
       <Link
         href="/premium"
+        onClick={handleClick}
         className="inline-flex items-center gap-2 rounded-xl bg-brand px-8 py-3.5 text-base font-semibold text-white shadow-lg shadow-brand/25 transition-all hover:bg-brand-light hover:shadow-xl hover:shadow-brand/30"
       >
         Desbloquear ahora
